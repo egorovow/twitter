@@ -1,12 +1,14 @@
 function hashTags(tag) {
   const arr = tag.split(' ');
+  const arrNew = [];
   let str = '';
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].slice(0, 1) == '#') {
-      str = arr[i].slice(1);
-      arr[i] = `href="/search?tag=${str}">#${str}</a>`;
+  arr.forEach((el) => {
+    if (el.slice(0, 1) == '#') {
+      str = el.slice(1);
+      el = `<a href="/search?tag=${str}">#${str}</a>`;
     }
-  }
-  const res = arr.join(' ');
+    arrNew.push(el);
+  });
+  const res = arrNew.join(' ');
   return res;
 }
