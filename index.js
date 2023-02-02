@@ -4,29 +4,19 @@ function replaceLink(message) {
   const arrNew = [];
   let res = '';
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].slice(0, 8) == 'https://') { str = arr[i].slice(8); arr[i] = ''; }
-    if (arr[i].slice(0, 7) == 'http://') { str = arr[i].slice(7); arr[i] = ''; }
-    if (arr[i].slice(0, 4) == 'www.') { str = arr[i].slice(4); arr[i] = ''; }
-    if (arr[i].slice(0, 6) == 'ftp://') { str = arr[i].slice(6); arr[i] = ''; }
+  arr.forEach((el) => {
+    if (el.slice(0, 8) == 'https://') { str = el.slice(8); el = ''; }
+    if (el.slice(0, 7) == 'http://') { str = el.slice(7); el = ''; }
+    if (el.slice(0, 4) == 'www.') { str = el.slice(4); el = ''; }
+    if (el.slice(0, 6) == 'ftp://') { str = el.slice(6); el = ''; }
+    if (el.slice(-4, -3) == '.') { str = el; }
+    if (el.slice(-3, -2) == '.') { str = el; }
 
     if (str != '') {
       res = `<a href="https://${str}">${str}</a>`;
       arrNew.push(res);
       str = '';
     }
-  }
-
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].slice(-4, -3) == '.') { str = arr[i]; arr[i] = ''; }
-    if (arr[i].slice(-3, -2) == '.') { str = arr[i]; arr[i] = ''; }
-
-    if (str != '') {
-      res = `<a href="https://${str}">${str}</a>`;
-      arrNew.push(res);
-      str = '';
-    }
-  }
-
+  });
   return arrNew.join(' ');
 }
